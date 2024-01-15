@@ -30,7 +30,7 @@ with open(csv_filename, 'w', encoding='utf-8') as csv_file:
                 for tweet_data in tweet_all_data:
                     # Extracting the specified fields
                     tweet_id = tweet_data['id']
-                    tweet_text = tweet_data['text'].replace('\n', ' ').replace('"', '').replace(',',' ')
+                    tweet_text = tweet_data['text'].replace('\n', ' ').replace('"', '').replace(',', '')
                     if tweet_data.get('entities') and tweet_data['entities'].get('hashtags'):
                         hashtags = [tag['tag'] for tag in tweet_data['entities']['hashtags']]
                     else:
