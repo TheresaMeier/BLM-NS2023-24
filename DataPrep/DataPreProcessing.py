@@ -2,7 +2,7 @@ import json
 import datetime
 import sys
 
-year = 2013
+year = 2020
 
 if year == 2013:
     start_date_1 = datetime.datetime(2013, 7, 13)
@@ -15,7 +15,7 @@ else:
     sys.exit()
     
 # Create a new CSV file for writing
-csv_filename = '/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_tweets_2013_final.csv'
+csv_filename = '/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_tweets_2020.csv'
 
 with open(csv_filename, 'w', encoding='utf-8') as csv_file:
     csv_file.write('tweet_id,tweet_text,hashtags,created_at,retweet_count,reply_count,like_count,quote_count,author_id\n')
@@ -30,7 +30,7 @@ with open(csv_filename, 'w', encoding='utf-8') as csv_file:
                 for tweet_data in tweet_all_data:
                     # Extracting the specified fields
                     tweet_id = tweet_data['id']
-                    tweet_text = tweet_data['text'].replace('\n', ' ')
+                    tweet_text = tweet_data['text'].replace('\n', ' ').replace('"', '').replace(',',' ')
                     if tweet_data.get('entities') and tweet_data['entities'].get('hashtags'):
                         hashtags = [tag['tag'] for tag in tweet_data['entities']['hashtags']]
                     else:
