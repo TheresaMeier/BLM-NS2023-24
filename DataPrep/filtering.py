@@ -4,11 +4,12 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
-file = "tdvsccj.csv"
+file = "/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_data/filtered_tweets_2020_final.csv"
 filtering = 0.1  # % of the dataset
 
 # Reading the CSV file
-df = pd.read_csv(file)
+dff = pd.read_csv(file)
+df = dff.copy()
 
 # Standardizing the Data
 scaler = StandardScaler()
@@ -29,7 +30,7 @@ print("Score Cutoff for Top", filtering , "% of the Dataset:", top_percentile_cu
 filtered_df.drop(columns=['pca_score'], inplace=True)
 
 # Writing the filtered DataFrame to a new CSV file
-filtered_df.to_csv('filtered_data.csv', index=False)
+filtered_df.to_csv('/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_data/filtered_tweeds_2020_final_true.csv', index=False)
 
 # Applying PCA again to get the components
 pca_components = pca.components_
@@ -43,4 +44,34 @@ plt.title('Feature Importances for the First Principal Component')
 plt.show()
 
 # Saving the plot
-plt.savefig('resultpca.png')
+plt.savefig('/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_data/PCA_firstComponent.pdf')
+
+pca_full = PCA()
+
+pca_full.fit(dff[["retweet_count","reply_count","like_count","quote_count"]])
+
+# Extracting the explained variance ratio of each component
+
+explained_variance = pca_full.explained_variance_ratio_
+
+
+# Extracting the explained variance ratio of each component
+
+explained_variance = pca_full.explained_variance_ratio_
+
+
+
+# Plotting the explained variance ratio for each principal component
+
+plt.figure(figsize=(10, 6))
+
+plt.bar(range(1, len(explained_variance) + 1), explained_variance, tick_label=[f"PC{i}" for i in range(1, len(explained_variance) + 1)])
+
+plt.xlabel('Principal Components')
+
+plt.ylabel('Variance Explained')
+
+plt.title('Explained Variance by Each Principal Component')
+
+plt.show()
+plt.savefig('/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_data/PCA_components.pdf')
