@@ -12,7 +12,7 @@ import seaborn as sns
 
 #### 2020 ####
 file = "/home/theresa/Schreibtisch/Theresa/STUDIUM/Master Statistics and Data Science/Padova/Network Science/Project/Data/filtered_data/filtered_tweets_2020_all.csv"
-filtering = 0.2  # % of the dataset
+filtering = 0.1  # % of the dataset
 
 # Reading the CSV file
 df = pd.read_csv(file)
